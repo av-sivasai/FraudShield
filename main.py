@@ -12,6 +12,7 @@ import uvicorn
 import os
 
 # Create Database tables
+os.makedirs("./data", exist_ok=True)
 Base.metadata.create_all(bind=engine)
 
 limiter = Limiter(key_func=get_remote_address)
