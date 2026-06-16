@@ -1,4 +1,4 @@
-# Credit Card Fraud Detection API
+# FraudShield: Credit Card Fraud Detection API
 
 A production-ready FastAPI application for predicting credit card fraud. This project was refactored into a scalable MLOps pipeline with structured architecture, batch prediction, SQLite history, and deployment-ready files.
 
@@ -15,7 +15,7 @@ A production-ready FastAPI application for predicting credit card fraud. This pr
 
 ## Project Structure
 
-```
+```text
 .
 ├── app/
 │   ├── api/          # API Routers and endpoints
@@ -38,7 +38,11 @@ A production-ready FastAPI application for predicting credit card fraud. This pr
 1. Create a virtual environment and install dependencies:
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   # On Windows
+   venv\Scripts\activate
+   # On Mac/Linux
+   source venv/bin/activate
+   
    pip install -r requirements.txt
    ```
 
@@ -63,11 +67,6 @@ This repository is configured for easy deployment on [Render](https://render.com
 2. In Render, select **New -> Blueprint**.
 3. Connect your GitHub repository.
 4. Render will automatically detect `render.yaml` and deploy your API as a Docker service.
-
-### Railway Deployment
-1. Connect your GitHub repository to Railway.
-2. Railway will automatically detect the `Dockerfile` and build it.
-3. Add an environment variable `PORT` in Railway settings if needed.
 
 ## Endpoints
 
