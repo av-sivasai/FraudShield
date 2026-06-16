@@ -116,11 +116,3 @@ curl -X 'POST' \
   "Amount": 149.62
 }'
 ```
-
-## Resume Bullet Points
-
-- **Architected** a production-ready Machine Learning API using **FastAPI**, transitioning a monolithic script into a modular, maintainable MLOps structure (Services, Core, ML layers).
-- **Implemented** robust API endpoints featuring strict input validation via **Pydantic**, comprehensive error handling, and model confidence scoring.
-- **Developed** a batch prediction pipeline for processing large datasets via CSV uploads, significantly reducing prediction turnaround time for bulk requests.
-- **Engineered** a lightweight SQLite-based prediction history tracking system using **SQLAlchemy** to audit and monitor deployed model inferences.
-- **Containerized** the application using **Docker** and authored automated deployment configurations (`render.yaml`, `Procfile`) for seamless cloud hosting on Render and Railway.
