@@ -64,13 +64,17 @@ document.addEventListener("DOMContentLoaded", () => {
         for(let i=1; i<=28; i++) txData[`V${i}`] = 0;
         txData["Time"] = 0;
         
-        // Inject extreme outliers known to correlate with fraud in PCA datasets
-        txData["V14"] = -15.0;
-        txData["V12"] = -10.0;
-        txData["V10"] = -10.0;
-        txData["V17"] = -12.0;
-        txData["V4"] = 8.0;
-        txData["V11"] = 6.0;
+        // Inject a known, verified fraud pattern from the Kaggle dataset (Index 541)
+        txData["V1"] = -2.312226542; txData["V2"] = 1.951992011; txData["V3"] = -1.609850732;
+        txData["V4"] = 3.997905588;  txData["V5"] = -0.522187865; txData["V6"] = -1.426545319;
+        txData["V7"] = -2.537387306; txData["V8"] = 1.391657248;  txData["V9"] = -2.770089277;
+        txData["V10"] = -2.772272145; txData["V11"] = 3.202033207; txData["V12"] = -2.899907388;
+        txData["V13"] = -0.595221881; txData["V14"] = -4.289253782; txData["V15"] = 0.38972412;
+        txData["V16"] = -1.14074718;  txData["V17"] = -2.830055675; txData["V18"] = -0.016822468;
+        txData["V19"] = 0.416955705;  txData["V20"] = 0.126910559;  txData["V21"] = 0.517232371;
+        txData["V22"] = -0.035049369; txData["V23"] = -0.465211076; txData["V24"] = 0.320198199;
+        txData["V25"] = 0.044519167;  txData["V26"] = 0.177839798;  txData["V27"] = 0.261145003;
+        txData["V28"] = -0.143275875;
 
         try {
             const res = await fetch("/api/v1/predict/", {
