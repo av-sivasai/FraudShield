@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
             btnText.textContent = "Run Prediction";
             loader.classList.add("hidden");
         }
+    });
+
     // Simulate Fraud button
     document.getElementById("simulate-fraud-btn").addEventListener("click", async () => {
         const btnText = document.querySelector(".btn-text");
