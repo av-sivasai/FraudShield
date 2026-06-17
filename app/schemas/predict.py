@@ -37,6 +37,7 @@ class PredictionResponse(BaseModel):
     fraud_prediction: int = Field(..., description="1 if fraud, 0 otherwise")
     probability: float = Field(..., description="Probability of fraud")
     confidence_score: str = Field(..., description="High, Medium, or Low")
+    explanation: Optional[dict] = Field(None, description="Feature importances explaining the prediction")
 
 class BatchPredictionResponse(BaseModel):
     total_processed: int

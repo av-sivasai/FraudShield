@@ -40,11 +40,17 @@ async def log_requests(request: Request, call_next):
     logger.info(f"Response status: {response.status_code}")
     return response
 
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def root():
-    return {"message": "Welcome to the Credit Card Fraud Detection API. Visit /docs for documentation."}
+    with open("app/static/index.html") as f:
+        return f.read()
 
 @app.get("/health")
 def root_health():

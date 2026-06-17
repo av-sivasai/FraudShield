@@ -29,7 +29,17 @@ class MLModel:
         scaled_data = self.scaler.transform(df)
         prediction = self.model.predict(scaled_data)
         probability = self.model.predict_proba(scaled_data)
-        return int(prediction[0]), float(probability[0][1])
+        
+        explanation = None
+        if hasattr(self.model, "feature_importances_"):
+            importances = self.model.feature_importances_
+            feature_names = df.columns
+            # Zip and sort by importance
+            feat_imp = sorted(zip(feature_names, importances), key=lambda x: x[1], reverse=True)
+            # Take top 3
+            explanation = {feat: float(imp) for feat, imp in feat_imp[:3]}
+            
+        return int(prediction[0]), float(probability[0][1]), explanation
 
 class MockModel:
     def predict(self, X):

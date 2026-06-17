@@ -16,7 +16,7 @@ def get_confidence_score(probability: float) -> str:
 def process_prediction(transaction: Transaction, db: Session, client_ip: str = None) -> PredictionResponse:
     df = pd.DataFrame([transaction.model_dump()])
     
-    prediction, probability = ml_model.predict(df)
+    prediction, probability, explanation = ml_model.predict(df)
     confidence = get_confidence_score(probability)
     
     # Save to history
@@ -36,5 +36,6 @@ def process_prediction(transaction: Transaction, db: Session, client_ip: str = N
     return PredictionResponse(
         fraud_prediction=prediction,
         probability=probability,
-        confidence_score=confidence
+        confidence_score=confidence,
+        explanation=explanation
     )

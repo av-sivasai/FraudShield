@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FraudShield AI - Enterprise Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="shield-icon">🛡️</span> FraudShield <span class="highlight">AI</span>
+            </div>
+            <nav>
+                <a href="/docs" target="_blank" class="nav-link">API Docs</a>
+                <button id="export-btn" class="btn-secondary">Export Data (CSV)</button>
+            </nav>
+        </header>
+
+        <main>
+            <section class="metrics-grid">
+                <div class="metric-card glass">
+                    <h3>Total Predictions</h3>
+                    <div class="metric-value" id="total-predictions">...</div>
+                </div>
+                <div class="metric-card glass">
+                    <h3>Frauds Detected</h3>
+                    <div class="metric-value text-danger" id="total-frauds">...</div>
+                </div>
+                <div class="metric-card glass">
+                    <h3>Current Fraud Rate</h3>
+                    <div class="metric-value text-warning" id="fraud-rate">...</div>
+                </div>
+            </section>
+
+            <div class="dashboard-content">
+                <section class="tester-section glass">
+                    <h2>Live Transaction Tester</h2>
+                    <p>Enter a transaction amount to simulate a prediction.</p>
+                    <form id="predict-form">
+                        <div class="form-group">
+                            <label for="amount">Transaction Amount ($)</label>
+                            <input type="number" id="amount" placeholder="e.g., 25000" required step="0.01" min="0">
+                        </div>
+                        <button type="submit" class="btn-primary" id="predict-btn">
+                            <span class="btn-text">Run Prediction</span>
+                            <span class="loader hidden"></span>
+                        </button>
+                    </form>
+                    
+                    <div id="prediction-result" class="result-card hidden">
+                        <div class="result-header">
+                            <h3 id="result-title">Analyzing...</h3>
+                        </div>
+                        <div class="result-details">
+                            <p>Probability: <span id="res-prob"></span></p>
+                            <p>Confidence: <span id="res-conf"></span></p>
+                        </div>
+                        <div class="explanation-box" id="res-explanation">
+                            <!-- Feature importance will be rendered here -->
+                        </div>
+                    </div>
+                </section>
+
+                <section class="history-section glass">
+                    <div class="section-header">
+                        <h2>Recent Activity</h2>
+                        <button class="btn-icon" id="refresh-btn">↻</button>
+                    </div>
+                    <div class="table-container">
+                        <table id="history-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Time</th>
+                                    <th>Amount</th>
+                                    <th>Risk</th>
+                                    <th>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-body">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
