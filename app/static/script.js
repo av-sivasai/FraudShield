@@ -58,8 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
         loader.classList.remove("hidden");
         resultCard.classList.add("hidden");
 
-        // Build known fraudulent transaction data
-        const txData = { Amount: 0.0 }; // Amount is often 0 for auth checks in fraud
+        // Build known fraudulent transaction data using the user's typed Amount
+        const amount = document.getElementById("amount").value || 0;
+        const txData = { Amount: parseFloat(amount) };
         for(let i=1; i<=28; i++) txData[`V${i}`] = 0;
         txData["Time"] = 0;
         
