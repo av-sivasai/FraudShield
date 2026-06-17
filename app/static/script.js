@@ -45,6 +45,47 @@ document.addEventListener("DOMContentLoaded", () => {
             btnText.textContent = "Run Prediction";
             loader.classList.add("hidden");
         }
+    // Simulate Fraud button
+    document.getElementById("simulate-fraud-btn").addEventListener("click", async () => {
+        const btnText = document.querySelector(".btn-text");
+        const loader = document.querySelector(".loader");
+        const resultCard = document.getElementById("prediction-result");
+        
+        // Show loader
+        btnText.textContent = "Analyzing...";
+        loader.classList.remove("hidden");
+        resultCard.classList.add("hidden");
+
+        // Build known fraudulent transaction data
+        const txData = { Amount: 0.0 }; // Amount is often 0 for auth checks in fraud
+        for(let i=1; i<=28; i++) txData[`V${i}`] = 0;
+        txData["Time"] = 0;
+        
+        // Inject extreme outliers known to correlate with fraud in PCA datasets
+        txData["V14"] = -15.0;
+        txData["V12"] = -10.0;
+        txData["V10"] = -10.0;
+        txData["V17"] = -12.0;
+        txData["V4"] = 8.0;
+        txData["V11"] = 6.0;
+
+        try {
+            const res = await fetch("/api/v1/predict/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(txData)
+            });
+            const data = await res.json();
+            
+            showResult(data);
+            fetchSummary(); // update metrics silently
+        } catch (error) {
+            console.error("Prediction failed", error);
+            alert("Error running prediction. Check API logs.");
+        } finally {
+            btnText.textContent = "Run Prediction";
+            loader.classList.add("hidden");
+        }
     });
 });
 
